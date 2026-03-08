@@ -51,7 +51,7 @@ const Navbar = () => {
                 to={link.path}
                 className="relative group"
               >
-                <span className={`text-gray-300 hover:text-white transition-colors ${
+                <span className={`to-purple-600  ${
                   location.pathname === link.path ? 'text-white' : ''
                 }`}>
                   {link.name}

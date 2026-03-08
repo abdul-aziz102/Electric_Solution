@@ -52,7 +52,7 @@ const Navbar = () => {
                 className="relative group"
               >
                 <span className={`to-purple-600  ${
-                  location.pathname === link.path ? 'text-white' : ''
+                  location.pathname === link.path ? 'text-black' : ''
                 }`}>
                   {link.name}
                 </span>

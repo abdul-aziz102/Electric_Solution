@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Services from './pages/Services'
@@ -9,8 +10,13 @@ import Docs from './pages/Docs'
 import Contact from './pages/Contact'
 
 function App() {
+  // Ensure dark mode is always enabled
+  useEffect(() => {
+    document.documentElement.classList.add('dark')
+  }, [])
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-950 text-gray-100">
     <Router>
 
         <Navbar />

@@ -22,9 +22,9 @@ const Home = () => {
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-gray-950">
       {/* Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-gray-900"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-100/40 via-purple-100/40 to-gray-100 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-gray-900"></div>
 
       <motion.div
         className="absolute inset-0"
@@ -58,7 +58,7 @@ const HeroSection = () => {
               repeatType: 'reverse',
             }}
           >
-            <Zap className="w-6 h-6 text-blue-500/20" />
+            <Zap className="w-6 h-6 text-blue-500/20 dark:text-blue-500/20" />
           </motion.div>
         ))}
       </div>
@@ -79,7 +79,7 @@ const HeroSection = () => {
               transition={{ delay: 0.2 }}
               className="inline-block mb-4"
             >
-              <span className="px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-sm font-semibold">
+              <span className="px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-600 dark:text-blue-400 text-sm font-semibold">
                 ⚡ Professional Electricians
               </span>
             </motion.div>
@@ -90,11 +90,11 @@ const HeroSection = () => {
               </span>
             </h1>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-gray-300">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-gray-700 dark:text-gray-300">
               from Basic to Advanced Systems
             </h2>
 
-            <p className="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
               Expert electrical services for residential, commercial, and industrial projects.
               From simple repairs to complex installations, we deliver excellence with every connection.
             </p>
@@ -108,15 +108,15 @@ const HeroSection = () => {
             >
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-blue-400">15+</div>
-                <div className="text-sm text-gray-400">Years Experience</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-purple-400">2000+</div>
-                <div className="text-sm text-gray-400">Projects Done</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Projects Done</div>
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-green-400">500+</div>
-                <div className="text-sm text-gray-400">Happy Clients</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Happy Clients</div>
               </div>
             </motion.div>
 
@@ -260,7 +260,7 @@ const ServicesSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-900/50">
+    <section ref={ref} className="py-24 bg-gray-100 dark:bg-gray-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -271,7 +271,7 @@ const ServicesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Our Services
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Comprehensive electrical solutions tailored to your needs
           </p>
         </motion.div>
@@ -289,12 +289,12 @@ const ServicesSection = () => {
               <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl blur-xl"
                 style={{ background: `linear-gradient(to right, var(--tw-gradient-stops))` }}
               />
-              <div className="relative bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 group-hover:border-gray-600 transition-all">
+              <div className="relative bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 group-hover:border-gray-400 dark:group-hover:border-gray-600 transition-all shadow-lg">
                 <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${service.color} mb-4`}>
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-3 text-white">{service.title}</h3>
-                <p className="text-gray-400">{service.description}</p>
+                <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{service.description}</p>
               </div>
             </motion.div>
           ))}
@@ -316,7 +316,7 @@ const WhyChooseUsSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-950">
+    <section ref={ref} className="py-24 bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -326,7 +326,7 @@ const WhyChooseUsSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Why Choose Us
           </h2>
-          <p className="text-xl text-gray-400">Excellence in every connection</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Excellence in every connection</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -341,8 +341,8 @@ const WhyChooseUsSection = () => {
               <div className="inline-flex p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mb-4">
                 <reason.icon className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">{reason.title}</h3>
-              <p className="text-gray-400">{reason.description}</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{reason.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{reason.description}</p>
             </motion.div>
           ))}
         </div>
@@ -364,7 +364,7 @@ const WorkProcessSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-900/50">
+    <section ref={ref} className="py-24 bg-gray-100 dark:bg-gray-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -374,7 +374,7 @@ const WorkProcessSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Our Work Process
           </h2>
-          <p className="text-xl text-gray-400">Simple, transparent, and efficient</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Simple, transparent, and efficient</p>
         </motion.div>
 
         <div className="relative">
@@ -389,9 +389,9 @@ const WorkProcessSection = () => {
               className={`flex items-center mb-12 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
             >
               <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right lg:pr-12' : 'lg:text-left lg:pl-12'}`}>
-                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 inline-block">
-                  <h3 className="text-2xl font-semibold mb-2 text-white">{step.title}</h3>
-                  <p className="text-gray-400">{step.description}</p>
+                <div className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-300 dark:border-gray-700 inline-block shadow-lg">
+                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
                 </div>
               </div>
 
@@ -446,7 +446,7 @@ const ProjectsSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-950">
+    <section ref={ref} className="py-24 bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -456,7 +456,7 @@ const ProjectsSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <p className="text-xl text-gray-400">Showcasing our expertise and quality work</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Showcasing our expertise and quality work</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -469,7 +469,7 @@ const ProjectsSection = () => {
               whileHover={{ y: -10 }}
               className="group cursor-pointer"
             >
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 group-hover:border-blue-500 transition-all shadow-xl">
+              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 border border-gray-300 dark:border-gray-700 group-hover:border-blue-500 transition-all shadow-xl">
                 <div className="aspect-video relative overflow-hidden">
                   <img
                     src={project.image}
@@ -480,8 +480,8 @@ const ProjectsSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
                 </div>
                 <div className="p-6">
-                  <span className="text-sm text-blue-400 font-semibold">{project.category}</span>
-                  <h3 className="text-xl font-semibold mt-2 text-white group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                  <span className="text-sm text-blue-600 dark:text-blue-400 font-semibold">{project.category}</span>
+                  <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
                 </div>
               </div>
             </motion.div>
@@ -503,7 +503,7 @@ const TestimonialsSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-900/50">
+    <section ref={ref} className="py-24 bg-gray-100 dark:bg-gray-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -513,7 +513,7 @@ const TestimonialsSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Client Testimonials
           </h2>
-          <p className="text-xl text-gray-400">What our clients say about us</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">What our clients say about us</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -523,17 +523,17 @@ const TestimonialsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+              className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 shadow-lg"
             >
               <div className="flex mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
-              <p className="text-gray-300 mb-6 italic">"{testimonial.text}"</p>
+              <p className="text-gray-700 dark:text-gray-300 mb-6 italic">"{testimonial.text}"</p>
               <div>
-                <p className="font-semibold text-white">{testimonial.name}</p>
-                <p className="text-sm text-gray-400">{testimonial.role}</p>
+                <p className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</p>
               </div>
             </motion.div>
           ))}
@@ -557,7 +557,7 @@ const FAQSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-950">
+    <section ref={ref} className="py-24 bg-white dark:bg-gray-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -567,7 +567,7 @@ const FAQSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl text-gray-400">Got questions? We've got answers</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Got questions? We've got answers</p>
         </motion.div>
 
         <div className="space-y-4">
@@ -577,15 +577,15 @@ const FAQSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden"
+              className="bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden shadow-lg"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-800/70 transition-colors"
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800/70 transition-colors"
               >
-                <span className="font-semibold text-white">{faq.q}</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{faq.q}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-400 transition-transform ${
+                  className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${
                     openIndex === index ? 'transform rotate-180' : ''
                   }`}
                 />
@@ -597,7 +597,7 @@ const FAQSection = () => {
                   exit={{ height: 0, opacity: 0 }}
                   className="px-6 pb-4"
                 >
-                  <p className="text-gray-400">{faq.a}</p>
+                  <p className="text-gray-600 dark:text-gray-400">{faq.a}</p>
                 </motion.div>
               )}
             </motion.div>
@@ -640,7 +640,7 @@ const CTASection = () => {
 
 const ContactPreviewSection = () => {
   return (
-    <section className="py-24 bg-gray-950">
+    <section className="py-24 bg-gray-100 dark:bg-gray-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -651,37 +651,37 @@ const ContactPreviewSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-400">Quick contact form for immediate assistance</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Quick contact form for immediate assistance</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+          className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 shadow-lg"
         >
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
               />
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
               />
             </div>
             <input
               type="tel"
               placeholder="Phone Number"
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
             />
             <textarea
               placeholder="Tell us about your project..."
               rows="4"
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
             />
             <button
               type="submit"

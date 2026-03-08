@@ -48,7 +48,7 @@ const Services = () => {
   ]
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +58,7 @@ const Services = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Our Services
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Comprehensive electrical solutions for every need, from residential to industrial applications
           </p>
         </motion.div>
@@ -70,17 +70,17 @@ const Services = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-gray-600 transition-all"
+              className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all shadow-lg"
             >
               <div className={`inline-flex p-4 rounded-lg bg-gradient-to-r ${service.color} mb-6`}>
                 <service.icon className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-2xl font-bold mb-3 text-white">{service.title}</h2>
-              <p className="text-gray-400 mb-6">{service.description}</p>
+              <h2 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">{service.title}</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">{service.description}</p>
               <ul className="space-y-2">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-300">
-                    <Zap className="w-4 h-4 text-blue-400 mr-2" />
+                  <li key={idx} className="flex items-center text-gray-700 dark:text-gray-300">
+                    <Zap className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" />
                     {feature}
                   </li>
                 ))}

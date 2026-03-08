@@ -54,7 +54,7 @@ const Projects = () => {
   ]
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ const Projects = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Our Projects
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Showcasing our expertise through successful electrical installations across various sectors
           </p>
         </motion.div>
@@ -79,18 +79,18 @@ const Projects = () => {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-all">
+              <div className="bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden hover:border-gray-400 dark:hover:border-gray-600 transition-all shadow-lg">
                 <div className={`h-48 bg-gradient-to-br ${project.color} flex items-center justify-center`}>
                   <project.icon className="w-24 h-24 text-white opacity-80" />
                 </div>
                 <div className="p-6">
-                  <span className="text-sm font-semibold text-blue-400">{project.category}</span>
-                  <h3 className="text-2xl font-bold mt-2 mb-3 text-white">{project.title}</h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">{project.category}</span>
+                  <h3 className="text-2xl font-bold mt-2 mb-3 text-gray-900 dark:text-white">{project.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
                   <div className="space-y-2">
                     {project.details.map((detail, idx) => (
-                      <div key={idx} className="flex items-center text-sm text-gray-300">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mr-2" />
+                      <div key={idx} className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mr-2" />
                         {detail}
                       </div>
                     ))}

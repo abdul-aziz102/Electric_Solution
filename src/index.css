@@ -3,8 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  /* Dark Mode (Default) */
   body {
-    @apply bg-gray-950 text-gray-100;
+    @apply bg-gray-950 text-gray-100 transition-colors duration-300;
+  }
+
+  /* Light Mode */
+  :root:not(.dark) body {
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  /* Smooth transitions for theme changes */
+  * {
+    @apply transition-colors duration-200;
   }
 }
 
@@ -15,5 +26,23 @@
 
   .glow-effect:hover {
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  }
+
+  /* Light mode background utilities */
+  .bg-dark {
+    @apply bg-gray-950 dark:bg-gray-950;
+  }
+
+  .bg-light {
+    @apply bg-white dark:bg-gray-950;
+  }
+
+  /* Light mode text utilities */
+  .text-dark {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+
+  .text-light {
+    @apply text-gray-100 dark:text-gray-100;
   }
 }

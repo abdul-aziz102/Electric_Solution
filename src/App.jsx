@@ -8,7 +8,8 @@ import Projects from './pages/Projects'
 import About from './pages/About'
 import Docs from './pages/Docs'
 import Contact from './pages/Contact'
-
+import Footer from './pages/Footer'
+import WhatsAppWidget from './pages/WhatsAppWidget'
 function App() {
   // Ensure dark mode is always enabled
   useEffect(() => {
@@ -30,7 +31,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </AnimatePresence>
-
+        <WhatsAppWidget/>
+        <Footer/>
     </Router>
      </div>
   )

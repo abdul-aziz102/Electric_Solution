@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Zap, Shield, Clock, Award, ArrowRight, CheckCircle, Star, ChevronDown } from 'lucide-react'
+import { Zap, Shield, Clock, Award, ArrowRight, CheckCircle, Star, ChevronDown, Phone, Mail, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-950">
       <HeroSection />
       <ServicesSection />
       <WhyChooseUsSection />
@@ -20,83 +20,83 @@ const Home = () => {
   )
 }
 
+// ============================================================
+// HERO SECTION
+// ============================================================
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-gray-950">
-      {/* Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-100/40 via-purple-100/40 to-gray-100 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-gray-900"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950">
 
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          background: [
-            'radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-            'radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
-            'radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-          ],
+      {/* Grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(251,191,36,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(251,191,36,0.8) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
         }}
-        transition={{ duration: 10, repeat: Infinity }}
       />
 
-      {/* Floating Icons */}
+      {/* Radial glow center */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(251,191,36,0.08),transparent)]" />
+
+      {/* Animated floating bolts */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute"
-            initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
+            style={{
+              left: `${(i * 8.3) % 100}%`,
+              top: `${(i * 13.7) % 100}%`,
             }}
-            animate={{
-              y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000)],
-              x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000)],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
+            animate={{ y: [0, -30, 0], opacity: [0.06, 0.18, 0.06] }}
+            transition={{ duration: 4 + i * 0.7, repeat: Infinity, delay: i * 0.4 }}
           >
-            <Zap className="w-6 h-6 text-blue-500/20 dark:text-blue-500/20" />
+            <Zap className="w-5 h-5 text-yellow-400" />
           </motion.div>
         ))}
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Text Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* LEFT TEXT */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
             className="text-center lg:text-left"
           >
+            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-block mb-4"
+              className="inline-flex items-center gap-2 mb-6"
             >
-              <span className="px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-600 dark:text-blue-400 text-sm font-semibold">
-                ⚡ Professional Electricians
+              <span className="flex items-center gap-2 px-4 py-2 bg-yellow-400/8 border border-yellow-400/25 rounded-full text-yellow-400 text-sm font-semibold tracking-wide">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
+                Professional Electricians — Available 24/7
               </span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Professional Electrical Solutions
+            {/* Heading */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 leading-[1.05] tracking-tight">
+              <span className="text-white">Power</span>
+              <br />
+              <span
+                className="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent"
+                style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+              >
+                Your World
               </span>
+              <br />
+              <span className="text-white/70 text-4xl sm:text-5xl lg:text-5xl font-bold">With Confidence</span>
             </h1>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-gray-700 dark:text-gray-300">
-              from Basic to Advanced Systems
-            </h2>
-
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
-              Expert electrical services for residential, commercial, and industrial projects.
-              From simple repairs to complex installations, we deliver excellence with every connection.
+            <p className="text-lg text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Expert electrical services for residential, commercial & industrial projects.
+              From simple repairs to complex installations — delivered with precision and safety.
             </p>
 
             {/* Stats */}
@@ -104,20 +104,18 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-wrap gap-6 justify-center lg:justify-start mb-8"
+              className="flex flex-wrap gap-8 justify-center lg:justify-start mb-10"
             >
-              <div className="text-center lg:text-left">
-                <div className="text-3xl font-bold text-blue-400">15+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-3xl font-bold text-purple-400">2000+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Projects Done</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-3xl font-bold text-green-400">500+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Happy Clients</div>
-              </div>
+              {[
+                { num: '15+', label: 'Years Experience', color: 'text-yellow-400' },
+                { num: '2000+', label: 'Projects Done', color: 'text-orange-400' },
+                { num: '500+', label: 'Happy Clients', color: 'text-green-400' },
+              ].map((s) => (
+                <div key={s.label} className="text-center lg:text-left">
+                  <div className={`text-4xl font-black ${s.color} tracking-tight`}>{s.num}</div>
+                  <div className="text-xs font-semibold tracking-widest text-gray-500 uppercase mt-0.5">{s.label}</div>
+                </div>
+              ))}
             </motion.div>
 
             {/* CTA Buttons */}
@@ -127,174 +125,166 @@ const HeroSection = () => {
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all"
-                >
-                  Get Free Quote
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center px-8 py-4 bg-gray-800 border-2 border-gray-700 rounded-lg text-white font-semibold text-lg hover:border-blue-500 transition-all"
-                >
-                  Our Services
-                </Link>
-              </motion.div>
+              <Link
+                to="/contact"
+                className="relative overflow-hidden group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-gray-950 text-base transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(251,191,36,0.45)]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-[length:200%] animate-[shimmer_3s_ease_infinite]" />
+                <Zap className="relative z-10 w-4 h-4 fill-gray-950" strokeWidth={0} />
+                <span className="relative z-10">Get Free Quote</span>
+                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-base border border-white/10 bg-white/5 hover:bg-white/10 hover:border-yellow-400/30 transition-all duration-300"
+              >
+                Our Services
+              </Link>
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Image */}
+          {/* RIGHT IMAGE */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="relative"
           >
-            <div className="relative">
-              {/* Glow Effect Behind Image */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur-3xl opacity-20"></div>
+            {/* Glow behind image */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-3xl blur-3xl" />
 
-              {/* Image Container */}
-              <div className="relative rounded-2xl overflow-hidden border-2 border-gray-800 shadow-2xl">
-                <img
-                  src="https://img.freepik.com/free-photo/male-electrician-working-electrical-panel-male-electrician-overalls_169016-67091.jpg?semt=ais_rp_progressive&w=740&q=80"
-                  alt="Professional Electrician at Work"
-                  className="w-full h-auto object-cover"
-                />
+            <div className="relative rounded-2xl overflow-hidden border border-white/8 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
+              <img
+                src="https://img.freepik.com/free-photo/male-electrician-working-electrical-panel-male-electrician-overalls_169016-67091.jpg?semt=ais_rp_progressive&w=740&q=80"
+                alt="Professional Electrician"
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent" />
 
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"></div>
-
-                {/* Badge on Image */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1 }}
-                  className="absolute bottom-6 left-6 right-6"
-                >
-                  <div className="bg-gray-900/80 backdrop-blur-md border border-gray-700 rounded-xl p-4 flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-                      <Shield className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-white font-semibold">Certified & Licensed</div>
-                      <div className="text-gray-400 text-sm">Professional Electricians</div>
-                    </div>
+              {/* Floating badge on image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1 }}
+                className="absolute bottom-5 left-5 right-5"
+              >
+                <div className="bg-gray-950/80 backdrop-blur-xl border border-yellow-400/15 rounded-xl p-4 flex items-center gap-4">
+                  <div className="p-2.5 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg shrink-0">
+                    <Shield className="w-5 h-5 text-gray-950" />
                   </div>
-                </motion.div>
-              </div>
-
-              {/* Decorative Elements */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-2xl opacity-30"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-2xl opacity-30"
-              />
+                  <div>
+                    <div className="text-white font-semibold text-sm">Certified & Licensed</div>
+                    <div className="text-gray-400 text-xs">All work backed by warranty</div>
+                  </div>
+                  <div className="ml-auto flex -space-x-2">
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className="w-7 h-7 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 border-2 border-gray-950 flex items-center justify-center text-[9px] font-bold text-gray-950">
+                        {['JD', 'MK', 'AR'][i]}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
+
+            {/* Floating stat cards */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -top-5 -left-5 bg-gray-900 border border-white/8 rounded-xl px-4 py-3 shadow-xl backdrop-blur-xl"
+            >
+              <div className="text-2xl font-black text-yellow-400">4.9★</div>
+              <div className="text-[10px] text-gray-500 font-semibold tracking-wider uppercase">Avg Rating</div>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              className="absolute -bottom-5 -right-5 bg-gray-900 border border-white/8 rounded-xl px-4 py-3 shadow-xl backdrop-blur-xl"
+            >
+              <div className="text-2xl font-black text-green-400">24/7</div>
+              <div className="text-[10px] text-gray-500 font-semibold tracking-wider uppercase">Support</div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <ChevronDown className="w-8 h-8 text-gray-500" />
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-[10px] font-semibold tracking-[3px] text-gray-600 uppercase">Scroll</span>
+          <ChevronDown className="w-5 h-5 text-yellow-400/50" />
+        </div>
       </motion.div>
     </section>
   )
 }
 
+// ============================================================
+// SERVICES SECTION
+// ============================================================
 const ServicesSection = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const services = [
-    {
-      icon: Zap,
-      title: 'Residential Wiring',
-      description: 'Complete home electrical installations, rewiring, and upgrades for modern living.',
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      icon: Shield,
-      title: 'Commercial Solutions',
-      description: 'Professional electrical systems for offices, retail spaces, and commercial buildings.',
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      icon: Clock,
-      title: 'Emergency Repairs',
-      description: '24/7 emergency electrical services to keep your property safe and powered.',
-      color: 'from-orange-500 to-red-500',
-    },
-    {
-      icon: Award,
-      title: 'Solar Installation',
-      description: 'Eco-friendly solar panel systems for sustainable energy solutions.',
-      color: 'from-green-500 to-emerald-500',
-    },
-    {
-      icon: Zap,
-      title: 'Smart Home Systems',
-      description: 'Advanced automation and smart electrical systems for modern homes.',
-      color: 'from-indigo-500 to-blue-500',
-    },
-    {
-      icon: Shield,
-      title: 'Industrial Electrical',
-      description: 'Heavy-duty electrical solutions for industrial facilities and machinery.',
-      color: 'from-yellow-500 to-orange-500',
-    },
+    { icon: Zap, title: 'Residential Wiring', description: 'Complete home electrical installations, rewiring, and upgrades for modern living.', accent: 'from-yellow-400 to-orange-400', glow: 'rgba(251,191,36,0.2)' },
+    { icon: Shield, title: 'Commercial Solutions', description: 'Professional electrical systems for offices, retail spaces, and commercial buildings.', accent: 'from-blue-400 to-cyan-400', glow: 'rgba(96,165,250,0.2)' },
+    { icon: Clock, title: 'Emergency Repairs', description: '24/7 emergency electrical services to keep your property safe and powered.', accent: 'from-red-400 to-orange-400', glow: 'rgba(248,113,113,0.2)' },
+    { icon: Award, title: 'Solar Installation', description: 'Eco-friendly solar panel systems for sustainable energy solutions.', accent: 'from-green-400 to-emerald-400', glow: 'rgba(74,222,128,0.2)' },
+    { icon: Zap, title: 'Smart Home Systems', description: 'Advanced automation and smart electrical systems for modern homes.', accent: 'from-purple-400 to-pink-400', glow: 'rgba(192,132,252,0.2)' },
+    { icon: Shield, title: 'Industrial Electrical', description: 'Heavy-duty electrical solutions for industrial facilities and machinery.', accent: 'from-orange-400 to-yellow-400', glow: 'rgba(251,146,60,0.2)' },
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-100 dark:bg-gray-900/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-28 bg-gray-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(251,191,36,0.04),transparent)]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Our Services
+          <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+            What We Do
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Our <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Services</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Comprehensive electrical solutions tailored to your needs
-          </p>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">Comprehensive electrical solutions tailored to your needs</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="relative group"
+              whileHover={{ y: -6 }}
+              className="group relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl blur-xl"
-                style={{ background: `linear-gradient(to right, var(--tw-gradient-stops))` }}
+              {/* Card glow on hover */}
+              <div
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"
+                style={{ background: service.glow }}
               />
-              <div className="relative bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 group-hover:border-gray-400 dark:group-hover:border-gray-600 transition-all shadow-lg">
-                <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${service.color} mb-4`}>
-                  <service.icon className="w-8 h-8 text-white" />
+              <div className="relative bg-gray-900/60 backdrop-blur-sm border border-white/6 group-hover:border-white/12 rounded-2xl p-7 transition-all duration-300">
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${service.accent} mb-5 shadow-lg`}>
+                  <service.icon className="w-6 h-6 text-gray-950" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{service.description}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                <div className="flex items-center gap-1.5 mt-5 text-xs font-semibold text-gray-600 group-hover:text-yellow-400 transition-colors">
+                  Learn more <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </motion.div>
           ))}
@@ -304,236 +294,297 @@ const ServicesSection = () => {
   )
 }
 
+// ============================================================
+// WHY CHOOSE US
+// ============================================================
 const WhyChooseUsSection = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const reasons = [
-    { icon: Award, title: 'Certified Professionals', description: 'Licensed and insured electricians with years of experience' },
-    { icon: Clock, title: '24/7 Availability', description: 'Round-the-clock emergency services when you need us most' },
-    { icon: Shield, title: 'Safety First', description: 'Strict adherence to safety codes and regulations' },
-    { icon: CheckCircle, title: 'Quality Guaranteed', description: 'Warranty on all work with satisfaction guarantee' },
+    { icon: Award, title: 'Certified Professionals', description: 'Licensed and insured electricians with years of proven experience.', accent: 'from-yellow-400 to-orange-400' },
+    { icon: Clock, title: '24/7 Availability', description: 'Round-the-clock emergency services when you need us most.', accent: 'from-blue-400 to-cyan-400' },
+    { icon: Shield, title: 'Safety First', description: 'Strict adherence to safety codes and regulations — always.', accent: 'from-green-400 to-emerald-400' },
+    { icon: CheckCircle, title: 'Quality Guaranteed', description: 'Warranty on all work with 100% satisfaction guarantee.', accent: 'from-purple-400 to-pink-400' },
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-white dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Why Choose Us
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">Excellence in every connection</p>
-        </motion.div>
+    <section ref={ref} className="py-28 bg-[#060609] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_80%_50%,rgba(251,191,36,0.04),transparent)]" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reasons.map((reason, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+          {/* Left text */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+              Why Us
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
+              Excellence in<br />
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                Every Connection
+              </span>
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+              We don't just fix wires — we build lasting relationships. Our team of expert electricians brings professionalism, safety, and quality to every single job.
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-yellow-400 font-semibold hover:gap-3 transition-all"
             >
-              <div className="inline-flex p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mb-4">
-                <reason.icon className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{reason.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{reason.description}</p>
-            </motion.div>
-          ))}
+              Learn more about us <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          {/* Right cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {reasons.map((r, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                whileHover={{ y: -4 }}
+                className="group bg-gray-900/50 border border-white/6 hover:border-white/12 rounded-2xl p-6 transition-all duration-300"
+              >
+                <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${r.accent} mb-4`}>
+                  <r.icon className="w-5 h-5 text-gray-950" />
+                </div>
+                <h3 className="text-base font-bold text-white mb-2">{r.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{r.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
+// ============================================================
+// WORK PROCESS
+// ============================================================
 const WorkProcessSection = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const steps = [
-    { number: '01', title: 'Consultation', description: 'Initial assessment and understanding your electrical needs' },
-    { number: '02', title: 'Planning', description: 'Detailed project planning and cost estimation' },
-    { number: '03', title: 'Execution', description: 'Professional installation by certified electricians' },
-    { number: '04', title: 'Testing', description: 'Thorough testing and quality assurance checks' },
-    { number: '05', title: 'Handover', description: 'Final inspection and project documentation' },
+    { number: '01', title: 'Consultation', description: 'Initial assessment and understanding your electrical needs in detail.' },
+    { number: '02', title: 'Planning', description: 'Detailed project planning and transparent cost estimation.' },
+    { number: '03', title: 'Execution', description: 'Professional installation by our certified electricians.' },
+    { number: '04', title: 'Testing', description: 'Thorough testing and rigorous quality assurance checks.' },
+    { number: '05', title: 'Handover', description: 'Final inspection, documentation, and full project handover.' },
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-100 dark:bg-gray-900/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-28 bg-gray-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(251,191,36,0.04),transparent)]" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Our Work Process
+          <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+            How We Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Our <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Process</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">Simple, transparent, and efficient</p>
+          <p className="text-gray-400 text-lg">Simple, transparent, and efficient every time</p>
         </motion.div>
 
         <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600 hidden lg:block" />
+          {/* Vertical line */}
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-yellow-400/0 via-yellow-400/30 to-yellow-400/0 hidden md:block" />
 
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`flex items-center mb-12 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
-            >
-              <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right lg:pr-12' : 'lg:text-left lg:pl-12'}`}>
-                <div className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-300 dark:border-gray-700 inline-block shadow-lg">
-                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+          <div className="space-y-6">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                className="flex gap-8 items-start group"
+              >
+                {/* Number circle */}
+                <div className="relative shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center font-black text-gray-950 text-sm shadow-[0_0_20px_rgba(251,191,36,0.3)] z-10 relative">
+                    {step.number}
+                  </div>
                 </div>
-              </div>
 
-              <div className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-xl">
-                {step.number}
-              </div>
-
-              <div className="flex-1" />
-            </motion.div>
-          ))}
+                {/* Content */}
+                <div className="flex-1 bg-gray-900/50 border border-white/6 group-hover:border-yellow-400/15 rounded-2xl p-6 transition-all duration-300 group-hover:bg-gray-900/80">
+                  <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
+// ============================================================
+// PROJECTS SECTION
+// ============================================================
 const ProjectsSection = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const projects = [
-    {
-      title: 'Modern Office Complex',
-      category: 'Commercial',
-      image: 'https://images.adsttc.com/media/images/5177/024c/b3fc/4bc6/7600/0006/medium_jpg/7677e_peoplegroup_20130211_2.jpg?1366753865'
-    },
-    {
-      title: 'Luxury Villa Wiring',
-      category: 'Residential',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWuR1YYKs82gfOUrIOCX4UoRShdhxwR-LeuA&s'
-    },
-    {
-      title: 'Solar Farm Installation',
-      category: 'Renewable',
-      image: 'https://media.istockphoto.com/id/1340816904/photo/senior-engineer-and-aboriginal-australian-apprentice-working-together-on-solar-farm.jpg?s=612x612&w=0&k=20&c=8R06bbXX7DLtgftL22aJO2qYYRTXewZe5JzD0vSL4GE='
-    },
-    {
-      title: 'Industrial Plant Setup',
-      category: 'Industrial',
-      image: 'https://www.cad-schroer.com/wp-content/uploads/2000/11/Anlagenbau-Uebersicht.jpg'
-    },
-    {
-      title: 'Smart Home Automation',
-      category: 'Technology',
-      image: 'https://img.freepik.com/free-photo/man-electrical-technician-working-switchboard-with-fuses-uses-tablet_169016-25055.jpg'
-    },
-    {
-      title: 'Shopping Mall Electrical',
-      category: 'Commercial',
-      image: 'https://media.istockphoto.com/id/2219297094/photo/technicians-inspect-electrical-systems-and-discuss-maintenance-plans-in-industrial-workspace.jpg?s=612x612&w=0&k=20&c=aWtYHZmwoVf5ApXkD15oGvzQ70w4nOEclcJj4SVnasc='
-    },
+    { title: 'Modern Office Complex', category: 'Commercial', image: 'https://images.adsttc.com/media/images/5177/024c/b3fc/4bc6/7600/0006/medium_jpg/7677e_peoplegroup_20130211_2.jpg?1366753865' },
+    { title: 'Luxury Villa Wiring', category: 'Residential', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWuR1YYKs82gfOUrIOCX4UoRShdhxwR-LeuA&s' },
+    { title: 'Solar Farm Installation', category: 'Renewable', image: 'https://media.istockphoto.com/id/1340816904/photo/senior-engineer-and-aboriginal-australian-apprentice-working-together-on-solar-farm.jpg?s=612x612&w=0&k=20&c=8R06bbXX7DLtgftL22aJO2qYYRTXewZe5JzD0vSL4GE=' },
+    { title: 'Industrial Plant Setup', category: 'Industrial', image: 'https://www.cad-schroer.com/wp-content/uploads/2000/11/Anlagenbau-Uebersicht.jpg' },
+    { title: 'Smart Home Automation', category: 'Technology', image: 'https://img.freepik.com/free-photo/man-electrical-technician-working-switchboard-with-fuses-uses-tablet_169016-25055.jpg' },
+    { title: 'Shopping Mall Electrical', category: 'Commercial', image: 'https://media.istockphoto.com/id/2219297094/photo/technicians-inspect-electrical-systems-and-discuss-maintenance-plans-in-industrial-workspace.jpg?s=612x612&w=0&k=20&c=aWtYHZmwoVf5ApXkD15oGvzQ70w4nOEclcJj4SVnasc=' },
   ]
 
+  const categoryColors = {
+    Commercial: 'bg-blue-400/10 text-blue-400 border-blue-400/20',
+    Residential: 'bg-yellow-400/10 text-yellow-400 border-yellow-400/20',
+    Renewable: 'bg-green-400/10 text-green-400 border-green-400/20',
+    Industrial: 'bg-orange-400/10 text-orange-400 border-orange-400/20',
+    Technology: 'bg-purple-400/10 text-purple-400 border-purple-400/20',
+  }
+
   return (
-    <section ref={ref} className="py-24 bg-white dark:bg-gray-950">
+    <section ref={ref} className="py-28 bg-[#060609] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Featured Projects
+          <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+            Our Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Featured <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Projects</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">Showcasing our expertise and quality work</p>
+          <p className="text-gray-400 text-lg">Showcasing our expertise and quality work</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
+              key={i}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group cursor-pointer"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -8 }}
+              className="group cursor-pointer relative overflow-hidden rounded-2xl border border-white/6 hover:border-yellow-400/20 transition-all duration-400"
             >
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 border border-gray-300 dark:border-gray-700 group-hover:border-blue-500 transition-all shadow-xl">
-                <div className="aspect-video relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-                </div>
-                <div className="p-6">
-                  <span className="text-sm text-blue-600 dark:text-blue-400 font-semibold">{project.category}</span>
-                  <h3 className="text-xl font-semibold mt-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
-                </div>
+              <div className="aspect-video overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <span className={`inline-block text-[10px] font-bold tracking-[2px] uppercase px-2.5 py-1 rounded-full border ${categoryColors[project.category] || 'bg-gray-700 text-gray-300'} mb-2`}>
+                  {project.category}
+                </span>
+                <h3 className="text-white font-bold text-lg leading-tight group-hover:text-yellow-400 transition-colors">
+                  {project.title}
+                </h3>
               </div>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.7 }}
+          className="text-center mt-12"
+        >
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/10 hover:border-yellow-400/30 text-white hover:text-yellow-400 rounded-xl font-semibold text-sm transition-all duration-300 bg-white/5 hover:bg-white/8"
+          >
+            View All Projects <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
 }
 
+// ============================================================
+// TESTIMONIALS
+// ============================================================
 const TestimonialsSection = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const testimonials = [
-    { name: 'John Smith', role: 'Homeowner', text: 'Excellent service! They rewired my entire house professionally and efficiently.', rating: 5 },
-    { name: 'Sarah Johnson', role: 'Business Owner', text: 'Reliable and professional. Our office electrical system works flawlessly.', rating: 5 },
-    { name: 'Mike Davis', role: 'Property Manager', text: 'Best electricians in town. Always on time and deliver quality work.', rating: 5 },
+    { name: 'John Smith', role: 'Homeowner', text: 'Excellent service! They rewired my entire house professionally and efficiently. Best in the business!', rating: 5, avatar: 'JS' },
+    { name: 'Sarah Johnson', role: 'Business Owner', text: 'Reliable and professional. Our office electrical system works flawlessly. Highly recommend.', rating: 5, avatar: 'SJ' },
+    { name: 'Mike Davis', role: 'Property Manager', text: 'Best electricians in town. Always on time and consistently deliver quality work.', rating: 5, avatar: 'MD' },
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gray-100 dark:bg-gray-900/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-28 bg-gray-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(251,191,36,0.03),transparent)]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Client Testimonials
+          <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+            Reviews
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Client <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Testimonials</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">What our clients say about us</p>
+          <p className="text-gray-400 text-lg">What our clients say about us</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 shadow-lg"
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              whileHover={{ y: -6 }}
+              className="group bg-gray-900/50 border border-white/6 hover:border-yellow-400/15 rounded-2xl p-7 transition-all duration-300 relative overflow-hidden"
             >
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+              {/* Quote mark */}
+              <div className="absolute top-4 right-6 text-6xl font-black text-yellow-400/5 leading-none select-none">"</div>
+
+              {/* Stars */}
+              <div className="flex gap-0.5 mb-5">
+                {[...Array(t.rating)].map((_, j) => (
+                  <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
-              <p className="text-gray-700 dark:text-gray-300 mb-6 italic">"{testimonial.text}"</p>
-              <div>
-                <p className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</p>
+
+              <p className="text-gray-300 text-sm leading-relaxed mb-7 italic">"{t.text}"</p>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-gray-950 font-black text-xs">
+                  {t.avatar}
+                </div>
+                <div>
+                  <p className="font-bold text-white text-sm">{t.name}</p>
+                  <p className="text-gray-500 text-xs">{t.role}</p>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -543,63 +594,77 @@ const TestimonialsSection = () => {
   )
 }
 
+// ============================================================
+// FAQ SECTION
+// ============================================================
 const FAQSection = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [openIndex, setOpenIndex] = useState(null)
 
   const faqs = [
-    { q: 'Are you licensed and insured?', a: 'Yes, all our electricians are fully licensed, certified, and insured for your protection.' },
-    { q: 'Do you offer emergency services?', a: 'Absolutely! We provide 24/7 emergency electrical services for urgent situations.' },
-    { q: 'What areas do you serve?', a: 'We serve residential, commercial, and industrial clients across the entire metropolitan area.' },
-    { q: 'How do you price your services?', a: 'We provide transparent, upfront pricing with detailed quotes before starting any work.' },
-    { q: 'Do you offer warranties?', a: 'Yes, all our work comes with a comprehensive warranty for your peace of mind.' },
+    { q: 'Are you licensed and insured?', a: 'Yes, all our electricians are fully licensed, certified, and insured for your complete protection and peace of mind.' },
+    { q: 'Do you offer emergency services?', a: 'Absolutely! We provide 24/7 emergency electrical services for any urgent situations, day or night.' },
+    { q: 'What areas do you serve?', a: 'We serve residential, commercial, and industrial clients across the entire metropolitan area and surrounding regions.' },
+    { q: 'How do you price your services?', a: 'We provide transparent, upfront pricing with detailed quotes before starting any work — no hidden fees, ever.' },
+    { q: 'Do you offer warranties?', a: 'Yes, all our work comes with a comprehensive warranty for your complete peace of mind.' },
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-white dark:bg-gray-950">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-28 bg-[#060609] relative overflow-hidden">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Frequently Asked Questions
+          <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+            FAQ
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Got <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Questions?</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">Got questions? We've got answers</p>
+          <p className="text-gray-400 text-lg">We've got answers</p>
         </motion.div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
+        <div className="space-y-3">
+          {faqs.map((faq, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-300 dark:border-gray-700 overflow-hidden shadow-lg"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                openIndex === i ? 'border-yellow-400/25 bg-gray-900/80' : 'border-white/6 bg-gray-900/40'
+              }`}
             >
               <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800/70 transition-colors"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
               >
-                <span className="font-semibold text-gray-900 dark:text-white">{faq.q}</span>
-                <ChevronDown
-                  className={`w-5 h-5 text-gray-600 dark:text-gray-400 transition-transform ${
-                    openIndex === index ? 'transform rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {openIndex === index && (
+                <span className="font-semibold text-white text-sm">{faq.q}</span>
                 <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="px-6 pb-4"
+                  animate={{ rotate: openIndex === i ? 180 : 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="shrink-0"
                 >
-                  <p className="text-gray-600 dark:text-gray-400">{faq.a}</p>
+                  <ChevronDown className={`w-4 h-4 transition-colors ${openIndex === i ? 'text-yellow-400' : 'text-gray-500'}`} />
                 </motion.div>
-              )}
+              </button>
+
+              <AnimatePresence>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="px-6 pb-5 text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
@@ -608,89 +673,151 @@ const FAQSection = () => {
   )
 }
 
+// ============================================================
+// CTA SECTION
+// ============================================================
 const CTASection = () => {
   return (
-    <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="py-24 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-400" />
+      <div className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(0,0,0,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.8) 1px,transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
+
+      {/* Floating bolts */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${i * 18}%`, top: `${20 + (i % 3) * 30}%` }}
+          animate={{ y: [0, -20, 0], opacity: [0.1, 0.3, 0.1] }}
+          transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.5 }}
+        >
+          <Zap className="w-6 h-6 text-gray-950" />
+        </motion.div>
+      ))}
+
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Ready to Power Up Your Project?
+          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 tracking-tight leading-tight">
+            Ready to Power Up<br />Your Project?
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-gray-950/70 mb-10 max-w-xl mx-auto">
             Get a free consultation and quote today. Let's bring your electrical vision to life!
           </p>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              to="/contact"
-              className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold text-lg hover:shadow-2xl transition-all"
-            >
-              Contact Us Now
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </motion.div>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gray-950 text-yellow-400 rounded-xl font-bold text-base hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300"
+          >
+            Contact Us Now <ArrowRight className="w-5 h-5" />
+          </Link>
         </motion.div>
       </div>
     </section>
   )
 }
 
+// ============================================================
+// CONTACT PREVIEW
+// ============================================================
 const ContactPreviewSection = () => {
   return (
-    <section className="py-24 bg-gray-100 dark:bg-gray-950">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Get In Touch
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">Quick contact form for immediate assistance</p>
-        </motion.div>
+    <section className="py-28 bg-gray-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(251,191,36,0.04),transparent)]" />
 
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-300 dark:border-gray-700 shadow-lg"
+          className="text-center mb-16"
         >
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
-              />
-            </div>
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
-            />
-            <textarea
-              placeholder="Tell us about your project..."
-              rows="4"
-              className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:border-blue-500 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all"
-            >
-              Send Message
-            </button>
-          </form>
+          <span className="inline-block px-4 py-1.5 bg-yellow-400/8 border border-yellow-400/20 rounded-full text-yellow-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+            Contact
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Get In <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" style={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Touch</span>
+          </h2>
+          <p className="text-gray-400 text-lg">Quick response for immediate assistance</p>
         </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          {/* Contact info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 space-y-5"
+          >
+            {[
+              { icon: Phone, label: 'Call Us', value: '+1 (555) 123-4567', color: 'from-yellow-400 to-orange-400' },
+              { icon: Mail, label: 'Email Us', value: 'info@electricpro.com', color: 'from-blue-400 to-cyan-400' },
+              { icon: MapPin, label: 'Visit Us', value: '123 Electric Ave, City', color: 'from-green-400 to-emerald-400' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-4 bg-gray-900/50 border border-white/6 rounded-2xl p-5">
+                <div className={`p-2.5 rounded-xl bg-gradient-to-br ${item.color} shrink-0`}>
+                  <item.icon className="w-5 h-5 text-gray-950" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 font-semibold tracking-wider uppercase">{item.label}</p>
+                  <p className="text-white font-semibold text-sm mt-0.5">{item.value}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-3 bg-gray-900/50 backdrop-blur-sm border border-white/6 rounded-2xl p-8"
+          >
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-4 py-3 bg-gray-950/60 border border-white/8 rounded-xl text-white placeholder-gray-600 text-sm focus:border-yellow-400/40 focus:outline-none transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full px-4 py-3 bg-gray-950/60 border border-white/8 rounded-xl text-white placeholder-gray-600 text-sm focus:border-yellow-400/40 focus:outline-none transition-colors"
+                />
+              </div>
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                className="w-full px-4 py-3 bg-gray-950/60 border border-white/8 rounded-xl text-white placeholder-gray-600 text-sm focus:border-yellow-400/40 focus:outline-none transition-colors"
+              />
+              <textarea
+                placeholder="Tell us about your project..."
+                rows="4"
+                className="w-full px-4 py-3 bg-gray-950/60 border border-white/8 rounded-xl text-white placeholder-gray-600 text-sm focus:border-yellow-400/40 focus:outline-none transition-colors resize-none"
+              />
+              <button
+                type="button"
+                className="relative overflow-hidden w-full py-3.5 rounded-xl font-bold text-gray-950 text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(251,191,36,0.4)]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-[length:200%] animate-[shimmer_3s_ease_infinite]" />
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <Zap className="w-4 h-4 fill-gray-950" strokeWidth={0} />
+                  Send Message
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
